@@ -16,16 +16,38 @@
 </head>
 
 <body>
-    <h3 id="sticker">AJAX GitHub Profile Card Demo</h3>
-    <div class="row h-100">
+    <h3 id="sticker">AJAX GitHub Profile Search</h3>
+    <div class="row">
         <div class="col my-auto">
+                <form name="userForm" id="userForm">
+                <div class="form-group">
+
+                    <input type="text" class="form-control " id="username" placeholder="nick-lawrence" autofocus>
+                   
+
+                </div>
+                </form>
             <div id="profile">
+                <div class="card text-center profile-card mx-auto" style="width: 18rem;">
+                        <img class="card-img-top" src="https://avatars3.githubusercontent.com/u/39334884?v=4" alt="Card image cap">
+                        <div class="card-body">
+                            <h3 class="card-title font-weight-bold">Nick Lawrence</h3>
+                            <p class="card-text">Hi! My name is Nick Lawrence. I am a full-stack web developer who loves solving problems.</p>
+                            <a href="https://github.com/nick-lawrence" target="_blank" class="btn btn-primary"><i class="fab fa-github"></i> View GitHub Profile</a>
+                        </div>
+                        </div>
             </div>
         </div>
         </div>
     <script>
-        function getProfile() {
-            let username = 'nick-lawrence';
+        function getProfile(e) {
+            e.preventDefault();
+            console.log('Fetching...');
+            let username = document.getElementById('username').value;
+            if(!username || username == '') {
+                username = 'nick-lawrence';
+            };
+
             let xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -45,7 +67,7 @@
             xhttp.send();
         }
 
-        getProfile();
+        document.getElementById('userForm').addEventListener('submit', getProfile, false);
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
